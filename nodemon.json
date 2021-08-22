@@ -1,7 +1,7 @@
 {
 	"ignore": [".git", "node_modules/**/node_modules"],
 	"verbose": true,
-	"exec": "node --loader ts-node/esm ./src/index.ts",
+	"exec": "NO_WRITE=true node --loader ts-node/esm ./src/index.ts ./test/test.md",
 	"watch": ["src/"],
 	"ext": "ts, js, json"
 }
