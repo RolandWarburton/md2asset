@@ -1,6 +1,6 @@
 {
-	"name": "md2asset",
-	"version": "1.2.0",
+	"name": "@rolandwarburton/md2asset",
+	"version": "1.2.1",
 	"type": "module",
 	"engines": {
 		"node": "16.7.0"
@@ -31,7 +31,11 @@
 		"md2asset": "bin/index.js"
 	},
 	"publishConfig": {
-		"access": "public"
+		"access": "public",
+		"registry": "https://npm.pkg.github.org/"
+	},
+	"repository": {
+		"url": "git://github.com/rolandwarburton/md2asset.git"
 	},
 	"files": [
 		"dist",
