@@ -28,8 +28,7 @@ if (process.argv[2] === undefined) {
 	process.exit(1);
 }
 
-// TODO take the filepath as an argument
-// const imgfp = path.resolve(__dirname, "src", "test.md");
+// take the filepath as an argument
 const imgfp = process.argv[2];
 
 // load the markdownFile
@@ -131,7 +130,5 @@ function traverse(childArg: Parent, fp: string) {
 }
 
 traverse(syntaxTree, path.resolve(imgfp, "assets"));
-// const newContent = remark().stringify(syntaxTree);
-// fs.writeFileSync(imgfp, newContent);
-
-console.log(syntaxTree);
+const newContent = remark().stringify(syntaxTree);
+fs.writeFileSync(imgfp, newContent);
