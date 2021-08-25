@@ -32,7 +32,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.org/"
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "url": "git://github.com/rolandwarburton/md2asset.git"
