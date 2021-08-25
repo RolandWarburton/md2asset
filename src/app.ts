@@ -92,13 +92,21 @@ export function cli(args: string[]) {
 			newfp = path.resolve(
 				path.parse(imgfp).dir,
 				"assets",
+				path.parse(imgfp).name,
 				altText.trim() + "_" + storedImages[altText] + ext
 			);
 
 			// we passed the syntax tree by reference so we can directly edit the tree here and access it later
 			child.url = path.relative(path.parse(imgfp).dir, newfp);
 
-			// download the image (will write to disk at this point asynchronously and continue on)
+			// create a sub folder for this file in the assets directory
+			if (!fs.existsSync(path.parse(newfp).dir)) {
+				const p = path.join(path.parse(newfp).dir);
+				fs.mkdirSync(p);
+			}
+
+			// download the image to the assets/[file]/file.md
+			// (will write to disk at this point asynchronously and continue on)
 			downloadImage(url.toString(), newfp).then((_) =>
 				em.emit("downloadImage", url.toString())
 			);
