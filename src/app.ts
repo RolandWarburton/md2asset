@@ -10,13 +10,8 @@ function app(args: string[]): void {
 		console.log(`downloaded ${url}`);
 	});
 
-	if (args[2] === undefined) {
-		console.log("please pass in a file name");
-		process.exit(1);
-	}
-
 	// take the filepath as an argument
-	const mdFile = path.parse(args[2]);
+	const mdFile = path.parse(args[2] as string);
 
 	// load the markdownFile
 	const markdownFile = fs.readFileSync(path.format(mdFile), "utf-8");

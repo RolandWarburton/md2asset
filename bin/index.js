@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
 import cli from "../dist/cli.js";
-console.log("running");
+
+// call the app via the cli wrapper
 cli(process.argv);
