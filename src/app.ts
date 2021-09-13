@@ -9,7 +9,7 @@ import debug from "debug";
 const log = debug("md2asset");
 
 // the takes the current node and traverses all of its children
-function traverseNextNodes(node: Parent, mdFile: path.ParsedPath, storedImages: any) {
+function traverseNextNodes(node: Parent, mdFile: path.ParsedPath, storedImages: any): void {
 	// if there are children on this node, then we need to traverse them as well (recursively)
 	if (node.children) {
 		node.children.forEach((child: any) => {
@@ -18,7 +18,7 @@ function traverseNextNodes(node: Parent, mdFile: path.ParsedPath, storedImages: 
 	}
 }
 
-function traverse(childArg: Parent, mdFile: path.ParsedPath, storedImages: any = {}) {
+function traverse(childArg: Parent, mdFile: path.ParsedPath, storedImages: any = {}): void {
 	// check this node is an image
 	if (childArg.type !== "image") {
 		log(`skipping non image node`);
@@ -95,7 +95,7 @@ function traverse(childArg: Parent, mdFile: path.ParsedPath, storedImages: any =
 	}
 }
 
-function app(args: string[]) {
+function app(args: string[]): void {
 	// register an emitter to listen for the downloadImage event
 	em.on("downloadImage", (url: string) => {
 		console.log(`downloaded ${url}`);
