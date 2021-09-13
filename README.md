@@ -39,7 +39,7 @@ Take a look at the `downloadImage` event emitter to add your own custom hooks.
 
 ## Dev notes
 
-After making a change, before publishing test the app using `npm link`.
+After making a change, test the app using `npm link` to simulate it as a real CLI app.
 
 ```none
 npm unlink md2asset && \
@@ -47,7 +47,7 @@ npm run build && \
 npm link && md2asset test/test.md
 ```
 
-If you wish to run the app on a real file, you can use the `NO_WRITE` environment variable in your command.
+If you wish to run the app on a real file, you can use the `NO_WRITE` environment variable.
 
 ```none
 NO_WRITE=true npm run dev
