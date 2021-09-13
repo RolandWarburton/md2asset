@@ -44,9 +44,17 @@
   "include": [
     "./**/*",
   ],
+  // https://github.com/facebook/jest/issues/11453#issuecomment-877490572
+  "ts-node": {
+    "moduleTypes": {
+      "jest.config.ts": "cjs"
+    }
+  },
   "exclude": [
     "node_modules",
     "./dist/**/*",
-    "./bin/**/*"
+    "__tests__",
+    "./jest.config.ts",
+    "./bin/**/*",
   ]
 }
