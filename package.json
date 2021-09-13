@@ -1,64 +1,65 @@
 {
-  "name": "@rolandwarburton/md2asset",
-  "version": "1.2.2",
-  "type": "module",
-  "engines": {
-    "node": "16.7.0"
-  },
-  "description": "Convert urls from websites like imgur to files on your local computer.",
-  "main": "./dist/index.js",
-  "scripts": {
-    "dev": "DEBUG=app* nodemon --config nodemon.json src/index.ts",
-    "build": "rm -rf dist/* && tsc",
-    "prepare": "npm run build"
-  },
-  "keywords": [
-    "cli",
-    "md2asset"
-  ],
-  "author": "Roland Warburton",
-  "license": "ISC",
-  "dependencies": {
-    "debug": "^4.3.2",
-    "node-fetch": "^2.6.1",
-    "nodemon": "^2.0.12",
-    "npm": "^7.21.0",
-    "remark": "^14.0.1",
-    "typescript": "^4.3.5"
-  },
-  "bin": {
-    "md2asset": "bin/index.js"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
-  "repository": {
-    "url": "git://github.com/rolandwarburton/md2asset.git"
-  },
-  "files": [
-    "dist",
-    "bin",
-    "test",
-    "package.json",
-    "package-lock.json",
-    "README.md"
-  ],
-  "devDependencies": {
-    "@types/node": "^16.9.1",
-    "@types/node-fetch": "^2.5.12",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.24.1",
-    "ts-node": "^10.2.1"
-  },
-  "bugs": {
-    "url": "https://github.com/rolandwarburton/md2asset/issues"
-  },
-  "homepage": "https://github.com/rolandwarburton/md2asset#readme",
-  "directories": {
-    "test": "test"
-  }
+	"name": "@rolandwarburton/md2asset",
+	"version": "1.2.2",
+	"type": "module",
+	"engines": {
+		"node": "16.7.0"
+	},
+	"description": "Convert urls from websites like imgur to files on your local computer.",
+	"main": "./dist/index.js",
+	"scripts": {
+		"dev": "DEBUG=md2asset nodemon -r esm --inspect-brk --inspect=0.0.0.0:9229 --config nodemon.json src/index.ts",
+		"build": "rm -rf dist/* && tsc",
+		"prepare": "npm run build"
+	},
+	"keywords": [
+		"cli",
+		"md2asset"
+	],
+	"author": "Roland Warburton",
+	"license": "ISC",
+	"dependencies": {
+		"debug": "^4.3.2",
+		"esm": "^3.2.25",
+		"node-fetch": "^2.6.1",
+		"nodemon": "^2.0.12",
+		"npm": "^7.21.0",
+		"remark": "^14.0.1",
+		"typescript": "^4.3.5"
+	},
+	"bin": {
+		"md2asset": "bin/index.js"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org"
+	},
+	"repository": {
+		"url": "git://github.com/rolandwarburton/md2asset.git"
+	},
+	"files": [
+		"dist",
+		"bin",
+		"test",
+		"package.json",
+		"package-lock.json",
+		"README.md"
+	],
+	"devDependencies": {
+		"@types/node": "^16.9.1",
+		"@types/node-fetch": "^2.5.12",
+		"@typescript-eslint/eslint-plugin": "^4.29.2",
+		"@typescript-eslint/parser": "^4.29.2",
+		"eslint": "^7.32.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint-plugin-import": "^2.24.1",
+		"ts-node": "^10.2.1"
+	},
+	"bugs": {
+		"url": "https://github.com/rolandwarburton/md2asset/issues"
+	},
+	"homepage": "https://github.com/rolandwarburton/md2asset#readme",
+	"directories": {
+		"test": "test"
+	}
 }
