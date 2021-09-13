@@ -6,7 +6,7 @@ import downloadImage from "./downloadImage.js";
 import stringIsAValidUrl from "./util/validateUrl.js";
 import em from "./util/hookEmitter.js";
 
-export function cli(args: string[]) {
+function app(args: string[]) {
 	// register an emitter to listen for the downloadImage event
 	em.on("downloadImage", (url: string) => {
 		console.log(`downloaded ${url}`);
@@ -132,3 +132,5 @@ export function cli(args: string[]) {
 		fs.writeFileSync(imgfp, newContent);
 	}
 }
+
+export default app;
