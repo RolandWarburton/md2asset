@@ -18,7 +18,6 @@
 // =================================================================================================
 // TODO:
 //  - Add unit testing to avoid needing to use dev script (faster and better code quality)
-//  - Do not download the same image twice, check if it exists first already before downloading
 //  - Add support for multiple files to be parsed at a time
 
 import app from "./app.js";
