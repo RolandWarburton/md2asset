@@ -11,7 +11,7 @@
 		"dev": "DEBUG=md2asset nodemon -r esm --inspect-brk --inspect=0.0.0.0:9229 --config nodemon.json src/index.ts",
 		"build": "rm -rf dist/* && tsc",
 		"prepare": "npm run build",
-		"test": "jest --config=jest.config.ts --watchAll"
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.ts --watchAll"
 	},
 	"keywords": [
 		"cli",
