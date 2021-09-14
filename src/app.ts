@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { remark } from "remark";
 import downloadImage from "./downloadImage.js";
+import { traverseNextNodes } from "./traverseNextNodes.js";
 import traverseNodes from "./traverseNodes.js";
 import em from "./util/hookEmitter.js";
 
@@ -40,7 +41,14 @@ function app(args: string[]): void {
 		fs.mkdirSync(p);
 	}
 
-	traverseNodes(syntaxTree, mdFile, storedImages as any);
+	// the callback should be a function that causes traverseNodes to become recursive
+	// for this, traverseNextNodes is a function that traverses to all the children of the given node in the syntax tree
+	traverseNodes({
+		node: syntaxTree,
+		mdFile: mdFile,
+		storedImages: storedImages as any,
+		cb: traverseNextNodes,
+	});
 
 	// render out the new markdown, the altered image urls are contained in this syntax tree
 	const newContent = remark().stringify(syntaxTree);

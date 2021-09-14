@@ -1,40 +1,34 @@
 import fs from "node:fs";
 import path from "node:path";
 import em from "./util/hookEmitter.js";
-import { Content, Image, Parent } from "mdast";
+import { Content, Image } from "mdast";
 import stringIsAValidUrl from "./util/validateUrl.js";
 import debug from "debug";
+import { traverseNextNodes } from "./traverseNextNodes.js";
+import { TraverseNodesParams } from "./interfaces/TraverseNodesParams";
 export const log = debug("md2asset");
-
-// the takes the current node and traverses all of its children
-export function traverseNextNodes(node: Parent, mdFile: path.ParsedPath, storedImages: any): void {
-	// if there are children on this node, then we need to traverse them as well (recursively)
-	if (node.children) {
-		node.children.forEach((child: any) => {
-			traverseNodes(child, mdFile, storedImages);
-		});
-	}
-}
 
 /**
  *
- * @param childArg - The node to traverse
+ * @param node - The node to traverse
  * @param mdFile - The path to the markdown file
  * @param storedImages - The images that have been stored so far
+ * @param cb - Callback that is provided with the same params as traverseNodes. Importantly,
+ * the callback is given the current node so that it can traverse the next node down the tree.
  */
-function traverseNodes(childArg: Parent, mdFile: path.ParsedPath, storedImages: any): void {
+export function traverseNodes({ node, mdFile, storedImages, cb }: TraverseNodesParams): void {
 	// check this node is an image
-	if (childArg.type !== "image") {
-		log(`skipping non image node (${childArg.type})`);
-		traverseNextNodes(childArg, mdFile, storedImages);
+	if (node.type !== "image") {
+		log(`skipping non image node (${node.type})`);
+		cb({ node, mdFile, storedImages, cb: traverseNextNodes });
 		return;
 	}
 
 	// validate the image URL as an external one (not already pointing to a file)
-	const child = childArg as Content as Image;
+	const child = node as Content as Image;
 	if (!stringIsAValidUrl(child.url)) {
 		log(`skipping ${child.url}`);
-		traverseNextNodes(childArg, mdFile, storedImages);
+		cb({ node, mdFile, storedImages, cb: traverseNextNodes });
 		return;
 	}
 
@@ -91,11 +85,7 @@ function traverseNodes(childArg: Parent, mdFile: path.ParsedPath, storedImages: 
 	em.emit("downloadImage", { url: url.toString(), filePath: newfp });
 
 	// if there are children on this node, then we need to traverseNodes them as well (recursively)
-	if (childArg.children) {
-		childArg.children.forEach((child: any) => {
-			traverseNodes(child, mdFile, {});
-		});
-	}
+	cb({ node, mdFile, storedImages, cb: traverseNextNodes });
 }
 
 export default traverseNodes;
