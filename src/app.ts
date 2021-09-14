@@ -1,15 +1,17 @@
 import fs from "node:fs";
 import path from "node:path";
 import { remark } from "remark";
+import downloadImage from "./downloadImage.js";
 import traverseNodes from "./traverseNodes.js";
 import em from "./util/hookEmitter.js";
 
-function app(args: string[]): void {
-	// register an emitter to listen for the downloadImage event
-	em.on("downloadImage", (url: string) => {
-		console.log(`downloaded ${url}`);
-	});
+// register an emitter to listen for the downloadImage event
+em.on("downloadImage", ({ url, filePath }: { url: string; filePath: string }) => {
+	// download the image to the assets/[file]/file.md
+	downloadImage(url.toString(), filePath).then(() => console.log(`downloaded ${url}`));
+});
 
+function app(args: string[]): void {
 	// take the filepath as an argument
 	const mdFile = path.parse(args[2] as string);
 

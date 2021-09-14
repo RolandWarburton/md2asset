@@ -2,7 +2,6 @@ import fs from "node:fs";
 import path from "node:path";
 import em from "./util/hookEmitter.js";
 import { Content, Image, Parent } from "mdast";
-import downloadImage from "./downloadImage.js";
 import stringIsAValidUrl from "./util/validateUrl.js";
 import debug from "debug";
 export const log = debug("md2asset");
@@ -26,7 +25,7 @@ export function traverseNextNodes(node: Parent, mdFile: path.ParsedPath, storedI
 function traverseNodes(childArg: Parent, mdFile: path.ParsedPath, storedImages: any): void {
 	// check this node is an image
 	if (childArg.type !== "image") {
-		log(`skipping non image node`);
+		log(`skipping non image node (${childArg.type})`);
 		traverseNextNodes(childArg, mdFile, storedImages);
 		return;
 	}
@@ -88,9 +87,8 @@ function traverseNodes(childArg: Parent, mdFile: path.ParsedPath, storedImages: 
 		fs.mkdirSync(p);
 	}
 
-	// download the image to the assets/[file]/file.md
-	// (will write to disk at this point asynchronously and continue on)
-	downloadImage(url.toString(), newfp).then((_) => em.emit("downloadImage", url.toString()));
+	// emit a message that this image is ready to be handled
+	em.emit("downloadImage", { url: url.toString(), filePath: newfp });
 
 	// if there are children on this node, then we need to traverseNodes them as well (recursively)
 	if (childArg.children) {
