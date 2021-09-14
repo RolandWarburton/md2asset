@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import path from "node:path";
 import em from "./util/hookEmitter.js";
 import { Content, Image } from "mdast";
@@ -74,12 +73,6 @@ export function traverseNodes({ node, mdFile, storedImages, cb }: TraverseNodesP
 
 	// we passed the syntax tree by reference so we can directly edit the tree here and access it later
 	child.url = path.relative(mdFile.dir, newfp);
-
-	// create a sub folder for this file in the assets directory
-	if (!fs.existsSync(path.parse(newfp).dir)) {
-		const p = path.join(path.parse(newfp).dir);
-		fs.mkdirSync(p);
-	}
 
 	// emit a message that this image is ready to be handled
 	em.emit("downloadImage", { url: url.toString(), filePath: newfp });

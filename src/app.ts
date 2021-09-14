@@ -8,6 +8,12 @@ import em from "./util/hookEmitter.js";
 
 // register an emitter to listen for the downloadImage event
 em.on("downloadImage", ({ url, filePath }: { url: string; filePath: string }) => {
+	// create a sub folder for this file in the assets directory
+	if (!fs.existsSync(path.parse(filePath).dir)) {
+		const p = path.join(path.parse(filePath).dir);
+		fs.mkdirSync(p);
+	}
+
 	// download the image to the assets/[file]/file.md
 	downloadImage(url.toString(), filePath).then(() => console.log(`downloaded ${url}`));
 });
