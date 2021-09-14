@@ -12,22 +12,31 @@ import type { Config } from "@jest/types";
 
 const config: Config.InitialOptions = {
 	testEnvironment: "node",
+	// tell jest to use these file extensions only
 	moduleFileExtensions: ["js", "ts", "tsx"],
+	// run tests that end with .ts or .js and pass them through ts-jest to transpile them
 	transform: {
 		"^.+\\.(t|j)s$": "ts-jest",
 	},
 	globals: {
 		"ts-jest": {
+			// tell ts-jest what compiler settings to use
 			tsconfig: "tsconfig.json",
+			// support ESM https://kulshekhar.github.io/ts-jest/docs/next/guides/esm-support/
 			useESM: true,
 		},
 	},
+	// remap the names of imports to remove the .js extension
 	moduleNameMapper: {
 		"^(.*)\\.js$": "$1",
 	},
+	// treat .ts as ESM so you can use import/export instead of require/module.exports
 	extensionsToTreatAsEsm: [".ts"],
+	// a base config for jest to use
 	preset: "ts-jest",
+	// ignore dist folder. Do not look for tests here
 	testPathIgnorePatterns: ["<rootDir>/dist"],
+	// run any tests in the __tests__ directory
 	testMatch: ["**/__tests__/*.+(ts|tsx|js)"],
 };
 

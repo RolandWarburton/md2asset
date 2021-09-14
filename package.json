@@ -8,12 +8,12 @@
 	"description": "Convert urls from websites like imgur to files on your local computer.",
 	"main": "./dist/index.js",
 	"scripts": {
-		"dev": "DEBUG=md2asset nodemon --experimental-vm-modules --experimental-specifier-resolution=node --inspect-brk --inspect=0.0.0.0:9229 --config nodemon.json src/index.ts",
+		"//1": "if you want to remove .js extension you need to enable --experimental-specifier-resolution which removes need for .js extensions on imports https://github.com/TypeStrong/ts-node/issues/1007",
+		"dev": "DEBUG=md2asset nodemon --inspect-brk --inspect=0.0.0.0:9229 --config nodemon.json src/index.ts",
 		"build": "rm -rf dist/* && tsc",
 		"prepare": "npm run build",
-		"test:crap": "jest --loader=ts-node/esm --config=jest.config.js",
-		"test:old": "NODE_OPTIONS=--experimental-vm-modules NODE_OPTIONS=--experimental-specifier-resolution=node jest --config=jest.config.ts",
-		"test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/jest/bin/jest.js --config=jest.config.ts"
+		"//2": "experimental-vm-modules enables ESM support in nodejs which jest needs https://jestjs.io/docs/ecmascript-modules",
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.ts"
 	},
 	"keywords": [
 		"cli",
@@ -48,10 +48,6 @@
 		"README.md"
 	],
 	"devDependencies": {
-		"@babel/core": "^7.15.5",
-		"@babel/plugin-proposal-class-properties": "^7.14.5",
-		"@babel/plugin-transform-typescript": "^7.15.4",
-		"@babel/preset-env": "^7.15.6",
 		"@jest/globals": "^27.2.0",
 		"@types/common-tags": "^1.8.1",
 		"@types/jest": "^27.0.1",
@@ -59,7 +55,6 @@
 		"@types/node-fetch": "^2.5.12",
 		"@typescript-eslint/eslint-plugin": "^4.29.2",
 		"@typescript-eslint/parser": "^4.29.2",
-		"babel-jest": "^27.2.0",
 		"common-tags": "^1.8.0",
 		"eslint": "^7.32.0",
 		"eslint-config-airbnb-base": "^14.2.1",
