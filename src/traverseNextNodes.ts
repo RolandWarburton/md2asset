@@ -2,7 +2,12 @@ import { traverseNodes } from "./traverseNodes.js";
 import { TraverseNodesParams } from "./interfaces/TraverseNodesParams.js";
 
 // takes the current node and traverses all of its children
-export function traverseNextNodes({ node, mdFile, storedImages, cb }: TraverseNodesParams): void {
+export default function traverseNextNodes({
+	node,
+	mdFile,
+	storedImages,
+	cb,
+}: TraverseNodesParams): void {
 	// if there are children on this node, then we need to traverse them as well (recursively)
 	if (node.children) {
 		node.children.forEach((child: any) => {

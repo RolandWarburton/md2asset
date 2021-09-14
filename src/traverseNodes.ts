@@ -3,8 +3,8 @@ import em from "./util/hookEmitter.js";
 import { Content, Image } from "mdast";
 import stringIsAValidUrl from "./util/validateUrl.js";
 import debug from "debug";
-import { traverseNextNodes } from "./traverseNextNodes.js";
-import { TraverseNodesParams } from "./interfaces/TraverseNodesParams";
+import traverseNextNodes from "./traverseNextNodes.js";
+import { TraverseNodesParams } from "./interfaces/TraverseNodesParams.js";
 export const log = debug("md2asset");
 
 /**

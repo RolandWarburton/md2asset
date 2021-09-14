@@ -1,4 +1,5 @@
 import type { Config } from "@jest/types";
+// import jest from "ts-jest";
 
 // =================================================================================================
 // See this issue (and the comment below it) for why we need all these weird options
@@ -10,17 +11,24 @@ import type { Config } from "@jest/types";
 // NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.ts
 
 const config: Config.InitialOptions = {
-	moduleFileExtensions: ["ts", "tsx", "js"],
-	testMatch: ["**/?(*.)+(spec|test).+(ts|tsx|js)"],
+	testEnvironment: "node",
+	moduleFileExtensions: ["js", "ts", "tsx"],
+	transform: {
+		"^.+\\.(t|j)s$": "ts-jest",
+	},
+	globals: {
+		"ts-jest": {
+			tsconfig: "tsconfig.json",
+			useESM: true,
+		},
+	},
 	moduleNameMapper: {
 		"^(.*)\\.js$": "$1",
 	},
-	// this is set because its mentioned here: https://jestjs.io/docs/ecmascript-modules
 	extensionsToTreatAsEsm: [".ts"],
-	testEnvironment: "jest-environment-node",
-	transformIgnorePatterns: [
-		"node_modules/(?!aggregate-error|clean-stack|escape-string-regexp|indent-string|p-map)",
-	],
+	preset: "ts-jest",
+	testPathIgnorePatterns: ["<rootDir>/dist"],
+	testMatch: ["**/__tests__/*.+(ts|tsx|js)"],
 };
 
 export default config;

@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { remark } from "remark";
 import downloadImage from "./downloadImage.js";
-import { traverseNextNodes } from "./traverseNextNodes.js";
+import traverseNextNodes from "./traverseNextNodes.js";
 import traverseNodes from "./traverseNodes.js";
 import em from "./util/hookEmitter.js";
 
