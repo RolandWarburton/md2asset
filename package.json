@@ -67,8 +67,5 @@
 	"bugs": {
 		"url": "https://github.com/rolandwarburton/md2asset/issues"
 	},
-	"homepage": "https://github.com/rolandwarburton/md2asset#readme",
-	"directories": {
-		"test": "test"
-	}
+	"homepage": "https://github.com/rolandwarburton/md2asset#readme"
 }
