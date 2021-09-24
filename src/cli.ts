@@ -6,10 +6,9 @@ import debug from "debug";
 const log = debug("md2asset");
 
 import fs from "fs";
-const pkg = JSON.parse(fs.readFileSync("./package.json", "utf8"));
 
 function printHelp() {
-	console.log(`MD2Asset: version ${pkg.version}`);
+	console.log(`MD2Asset: version 1.2.3`);
 	console.log("Usage:\t\tmd2asset [FILE]");
 }
 

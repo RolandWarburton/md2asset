@@ -30,7 +30,7 @@
 		"remark": "^14.0.1"
 	},
 	"bin": {
-		"md2asset": "bin/index.js"
+		"md2asset": "./bin/index.js"
 	},
 	"publishConfig": {
 		"access": "public",
